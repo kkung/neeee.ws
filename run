@@ -1,0 +1,8 @@
+#!env/bin/python
+from neeeews.app import create_app
+
+app = create_app()
+if app.config['DEBUG']:
+    app.debug = True
+
+app.run(**app.config['WERKZEUG_OPTS'])

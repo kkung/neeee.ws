@@ -1,9 +1,12 @@
-.py[cod]
-.so
-.egg
-.egg-info
+*.pyc
+*.so
+*.egg
+*.egg-info
+*.db
 dist
 build
 eggs
 env
 .DS_Store
+local_settings.py
+alembic.ini
