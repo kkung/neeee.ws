@@ -1,0 +1,16 @@
+{%- macro form_field_errors(field) -%}
+    {% if field.errors %}
+        {%- for error in field.errors -%}
+        <span class="help-inline">{{ error }}</span>
+        {%- endfor -%}
+    {% endif %}
+{%- endmacro -%}
+{%- macro form_field(field, size='input-large') -%}
+    <div class="control-group {% if field.errors %}error{% endif %}">
+        {{field.label(class='control-label')}}
+        <div class="controls">
+            {{field(class=size)}}    
+            {{form_field_errors(field)}}
+        </div>
+    </div>
+{%- endmacro -%}

@@ -5,7 +5,7 @@ import sqlalchemy
 from . import database
 
 
-blueprints = {'neeeews.home:home': {}}
+blueprints = {'neeeews.news:news': {}}
 
 
 def create_app(config_file=None):

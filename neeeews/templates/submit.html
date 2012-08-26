@@ -1,0 +1,25 @@
+{% extends "_layout.html" %}
+{% import '_macros.html' as macros %}
+{% block content %}
+<form action="{{url_for("news.submit")}}"
+      method="post" accept-charset="utf-8" class="form-horizontal">
+    <legend>Submit news</legend>
+    {{macros.form_field(form.title, 'input-xlarge')}}
+    {{macros.form_field(form.link, 'input-xlarge')}}
+
+    <div class="control-group">
+        <div class="controls">
+            <span class="help-block">
+                제목만을 입력해 토론을 시작하거나, 제목과 URL을 입력하여 
+                링크를 사람들과 공유하세요. 제목은 필수입니다.
+            </span>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn">Cancel</button>
+    </div>
+
+</form>
+{% endblock %}
