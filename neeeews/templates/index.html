@@ -8,17 +8,22 @@
     <tbody>
         {% for n in news %}
         <tr>
-            <td>#.</td>
+            <td>{{loop.index}}.</td>
             <td>
-                <a href="#up"><i class="icon-chevron-up"></i></a>
-                <a href="#down"><i class="icon-chevron-down"></i></a>
+                <a class="vote"
+                   href="{{url_for('news.vote', id=n.id, vote_dir='up')}}">
+                    <i class="icon-chevron-up"></i>
+                </a>
+                <a class="vote"
+                   href="{{url_for('news.vote', id=n.id, vote_dir='down')}}">
+                    <i class="icon-chevron-down"></i>
+                </a>
             </td>
             <td>
                 <div>
-                    <a href="{{n.link}}">{{n.title}}</a>
+                    <a href="{{n.link}}">{{n.title}} ({{n.domain}})</a>
                     <p>
-                        <span> 0점</span>
-                        <span> | {{n.created_at}}</span>
+                        <span>{{n.created_at}}</span>
                         <span> | 댓글</span>
                         <span> | 보내기</span>
                     </p>
@@ -28,4 +33,17 @@
         {% endfor %}
     </tbody>
 </table>
+{% endblock %}
+{% block scripts %}
+
+<script type="text/javascript">
+    $("a.vote").click(function() {
+        var form = $("<form />")[0];
+        form.action = $(this).attr('href');
+        form.method = 'POST';
+        form.submit();
+        return false;
+    });
+</script>
+
 {% endblock %}

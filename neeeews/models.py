@@ -3,6 +3,7 @@ from sqlalchemy import orm
 from sqlalchemy.sql import functions
 from wtforms import Form, TextField, validators
 from . import database
+from datetime import datetime
 
 
 class News(database.Base):
@@ -20,6 +21,21 @@ class News(database.Base):
         DateTime(timezone=True),
         default=functions.now(),
         index=True)
+
+    votes = Column(Integer, default=0)
+
+    @property
+    def hour_age(self):
+        return (datetime.utcnow() - self.created_at).total_seconds() / 60 / 60
+
+    @property
+    def score(self, gravity=1.8):
+        return (self.votes - 1) / pow((self.hour_age + 2), gravity)
+
+    @property
+    def domain(self):
+        from urlparse import urlparse
+        return urlparse(self.link).hostname
 
 
 class NewsForm(Form):
